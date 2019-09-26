@@ -39,14 +39,15 @@ def get_gender_and_age(image_path):
     margin = 0.4
     out = {
         "image": None,
+        "faces": [],
         "results": []
     }
 
     # resize image
-    img = cv2.imread(image_path, 1)
-    h, w, _ = img.shape
+    img_orig = cv2.imread(image_path, 1)
+    h, w, _ = img_orig.shape
     r = 640 / max(w, h)
-    img = cv2.resize(img, (int(w * r), int(h * r)))
+    img = cv2.resize(img_orig, (int(w * r), int(h * r)))
 
     # prepare input
     input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -66,6 +67,11 @@ def get_gender_and_age(image_path):
             cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
             # cv2.rectangle(img, (xw1, yw1), (xw2, yw2), (255, 0, 0), 2)
             faces[i, :, :, :] = cv2.resize(img[yw1:yw2 + 1, xw1:xw2 + 1, :], (img_size, img_size))
+            out['faces'].append({
+                'x1': int(x1 / r), 'y1': int(y1 / r),
+                'x2': int(x2 / r), 'y2': int(y2 / r)
+            })
+            # cv2.rectangle(img_orig, (out['faces'][i]['x1'], out['faces'][i]['y1']), (out['faces'][i]['x2'], out['faces'][i]['y2']), (255, 0, 0), 2)
 
         # predict ages and genders of the detected faces
         results = predict(faces)

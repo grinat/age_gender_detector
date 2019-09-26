@@ -13,7 +13,7 @@ import detector
 app = Flask(__name__)
 CORS(app)
 
-APP_VERSION = "0.0.1"
+APP_VERSION = "0.0.2"
 
 
 @app.route('/api/v1/detect-gender-and-age', methods=['POST'])
@@ -36,7 +36,8 @@ def detect_gender_and_age():
     return json.dumps({
         "app_version": APP_VERSION,
         "image": "data:image/jpg;base64," + base64.b64encode(out['image']).decode('ascii'),
-        "results": out['results']
+        "results": out['results'],
+        "faces": out['faces']
     }), 200
 
 
