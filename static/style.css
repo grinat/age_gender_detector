@@ -23,9 +23,10 @@
     width: 100%;
 }
 
-#result {
-    width: 90%;
-    height: auto;
+#result, #video {
+    width: auto;
+    height: 50vh;
+    background: #cac9c9;
 }
 
 pre {

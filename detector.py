@@ -46,7 +46,7 @@ def get_gender_and_age(image_path):
     img = cv2.imread(image_path, 1)
     h, w, _ = img.shape
     r = 640 / max(w, h)
-    cv2.resize(img, (int(w * r), int(h * r)))
+    img = cv2.resize(img, (int(w * r), int(h * r)))
 
     # prepare input
     input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -77,7 +77,7 @@ def get_gender_and_age(image_path):
         for i, d in enumerate(detected):
             label = "{}, {}".format(int(predicted_ages[i]),
                                     "M" if predicted_genders[i][0] < 0.5 else "F")
-            draw_label(img, (d.left(), d.top()), label)
+            draw_label(img, (d.left(), d.bottom()), label)
 
             out['results'].append({
                 "age": int(predicted_ages[i]),

@@ -27,13 +27,17 @@ def detect_gender_and_age():
     out = detector.get_gender_and_age(f_path)
     os.remove(f_path)
 
-    result = {
+    if len(out['results']) == 0:
+        return json.dumps({
+            "code": "image_no_face",
+            "message": "No face found"
+        }), 422
+
+    return json.dumps({
         "app_version": APP_VERSION,
         "image": "data:image/jpg;base64," + base64.b64encode(out['image']).decode('ascii'),
         "results": out['results']
-    }
-
-    return json.dumps(result), 200
+    }), 200
 
 
 @app.errorhandler(HTTPException)
