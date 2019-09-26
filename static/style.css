@@ -29,6 +29,13 @@
     background: #cac9c9;
 }
 
+@media (max-width: 767px) {
+    #result, #video {
+        height: auto;
+        max-width: 90vw;
+    }
+}
+
 pre {
     overflow: auto;
     padding: 15px;
