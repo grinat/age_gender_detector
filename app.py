@@ -13,7 +13,7 @@ import detector
 app = Flask(__name__)
 CORS(app)
 
-APP_VERSION = "0.0.2"
+APP_VERSION = "0.0.3"
 
 
 @app.route('/api/v1/detect-gender-and-age', methods=['POST'])

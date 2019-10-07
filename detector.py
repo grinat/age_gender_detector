@@ -85,7 +85,9 @@ def get_gender_and_age(image_path):
 
             out['results'].append({
                 "age": int(predicted_ages[i]),
-                "gender": "M" if predicted_genders[i][0] < 0.5 else "F"
+                "gender": 0 if predicted_genders[i][0] < 0.5 else 1,
+                "gender_label": "Male" if predicted_genders[i][0] < 0.5 else "Female",
+                "gender_predict": float(predicted_genders[i][0])
             })
 
         # face with label now in in img
