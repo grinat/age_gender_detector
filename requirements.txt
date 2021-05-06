@@ -23,5 +23,5 @@ Theano==1.0.4
 Werkzeug==0.16.0
 wrapt==1.11.2
 Flask==1.1.1
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 uWSGI==2.0.18
